@@ -1,17 +1,12 @@
-import Login from './pages/auth/Login';
+import { CssBaseline } from "@mui/material";
+import SignIn from "./pages/authentication/SignIn";
 
 const App = () => {
 	return (
-		<div
-			style={{
-				display: 'flex',
-				flexDirection: 'column',
-				justifyContent: 'center',
-				alignItems: 'center',
-				minHeight: '100vh',
-			}}>
-			<Login />
-		</div>
+		<>
+		<CssBaseline />
+			<SignIn />
+		</>
 	);
 };
 

@@ -9,11 +9,23 @@ import {
 	Typography,
 } from '@mui/material';
 import { Box, Container } from '@mui/system';
-import React from 'react';
+import React, { useState } from 'react';
 
 const theme = createTheme();
 
 const Login = () => {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+
+	const handlsubmit = event => {
+		event.preventDefault();
+		const data = new FormData(event.currentTarget);
+		console.log({
+			email: data.get('email'),
+			password: data.get('password'),
+		});
+	};
+
 	return (
 		<ThemeProvider theme={theme}>
 			<Container component="main" maxWidth="sm">
@@ -23,11 +35,11 @@ const Login = () => {
 						display: 'flex',
 						flexDirection: 'column',
 						alignItems: 'center',
-						borderRadius: 4,
+						borderRadius: 3,
 						borderColor: 'light-blue',
 						px: 5,
 						py: 7,
-						boxShadow: 2,
+						boxShadow: 5,
 					}}>
 					<Avatar sx={{ m: 2, bgcolor: 'secondary.main' }}>
 						<LockOutlined />
@@ -37,7 +49,7 @@ const Login = () => {
 						Sign In
 					</Typography>
 
-					<Box component="form">
+					<Box component="form" onSubmit={handlsubmit}>
 						<TextField
 							type="text"
 							label="Email or Username"
@@ -48,6 +60,12 @@ const Login = () => {
 							id="email"
 							autoComplete="email"
 							autoFocus
+							value={email}
+							onChange={e => {
+								setEmail(e.target.value);
+							}}
+							helperText="Please enter your email address or username"
+							// InputProps={{readOnly:'true'}}
 						/>
 						<TextField
 							type="password"
@@ -58,7 +76,15 @@ const Login = () => {
 							name="password"
 							id="password"
 							autoComplete="password"
-							autoFocus
+							// autoFocus
+							value={password}
+							onChange={e => {
+								setPassword(e.target.value);
+							}}
+							helperText="Please enter password"
+							// multiline
+							// rows={4}
+							// defaultValue={}
 						/>
 						<Button
 							type="submit"
